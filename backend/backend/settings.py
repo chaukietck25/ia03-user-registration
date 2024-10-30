@@ -3,6 +3,7 @@ from datetime import timedelta
 from dotenv import load_dotenv
 import os
 import dj_database_url
+from decouple import config
 
 load_dotenv()
 
@@ -15,11 +16,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-nd^tmtn-lel2%o-xd6e!#l@qg5ww#&6hzlat2i82z7o9#%7@jq'
+# SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = config("DEBUG", cast=bool)
 
 ALLOWED_HOSTS = ["*"]
+# ALLOWED_HOSTS = config("ALLOWED_HOSTS".split(","))
 
 REST_FRAMEWORK = { 
     'DEFAULT_AUTHENTICATION_CLASSES': [ 
@@ -92,6 +96,7 @@ DATABASES = {
 }
 
 DATABASES['default'] = dj_database_url.parse("postgresql://ia03_user:EWqjaPP1rcZVgegvJaJ7jBX0ei85OoTh@dpg-csh3tkij1k6c7387cusg-a.singapore-postgres.render.com/ia03")
+# DATABASES['default'] = dj_database_url.parse(config("DATABASE_URL"))
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
